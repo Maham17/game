@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #videoDisplay {
+            display: none;
+            margin: 20px auto;
+            width: 480px;
+            height: 270px; /* Adjusted for standard 16:9 aspect ratio video */
+        }
+        video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Guess the Number</h2>
+    <p>Try to guess my number between 1 and 100.</p>
+    <input type="number" id="guessInput" placeholder="Enter your guess">
+    <button onclick="checkGuess()">Guess!</button>
+    <div id="videoDisplay">
+        <video id="funnyVideo" controls>
+            <source src="./RPReplay_Final1710968086.MP4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const answer = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function showVideo() {
+            const videoDisplay = document.getElementById('videoDisplay');
+            const funnyVideo = document.getElementById('funnyVideo');
+            funnyVideo.load(); // Reload the video to start from the beginning
+            funnyVideo.play(); // Play the video
+            videoDisplay.style.display = 'block';
+        }
+
+        function checkGuess() {
+            const guess = document.getElementById('guessInput').value;
+            attempts++;
+            const guessNum = Number(guess);
+
+            if (guessNum === answer) {
+                alert(`Correct! It took you ${attempts} attempts. Refresh the page to play again.`);
+                // Optionally, you could play a winning video here or redirect the user to another page
+            } else {
+                showVideo(); // Show and play the video for incorrect guesses
+            }
+        }
+    </script>
+</body>
+</html>
